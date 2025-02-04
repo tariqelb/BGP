@@ -67,6 +67,15 @@ The Topology:
    -   Using the command-line interface (CLI) – Right-click on the host and select Console.
 
    We will use the second approach.
+   Here is an example of the configuration on config file, don't forget to restart the device/host after saving config
+   
+   ##### Static config for eth0
+   auto eth0
+   iface eth0 inet static
+	address 192.168.2.2
+	netmask 255.255.255.0
+	gateway 192.168.2.1
+	up echo nameserver 192.168.2.1 > /etc/resolv.conf
    
 ##### On host-tel-bouh-1 host:
    - ip addr show eth0 : Display eth0 interface
