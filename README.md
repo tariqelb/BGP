@@ -19,6 +19,10 @@ The project is divided into three parts:
 In the `p1` folder, you will find installation and uninstallation scripts for both **Docker** and **GNS3**.  
 I recommend running the **GNS3 installation commands one by one** in the terminal so you can interact with the GNS3 GUI and configure it as needed.  
 
+**Note**: The installation script I provide is for Linux/Ubuntu OS. You can refer to the official website for instructions on other operating systems.
+   -   https://docs.gns3.com/docs/
+   -   https://docs.docker.com/engine/install/
+   
 ### Docker Images  
 The project includes two **Docker images**:  
 1. **Host Image**: Based on `linux/alpine` with pre-installed `busybox`.  
