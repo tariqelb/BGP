@@ -69,6 +69,26 @@ The Topology:
    We will use the second approach.
    
 ##### On host-tel-bouh-1 host:
+   - ip addr show eth0 : Display eth0 interface
+   - ip addr add 192.168.2.2/24 dev eth0 : Set IP address 192.168.2.2 mask 255.255.255.0 to inetface eth0
+   - ip route add default via 192.168.2.1 dev eth0 : Set default route (gateway)
+   - ip route : Display routes
+   
+  The same process will be repeated on all host machines. You can use the IPs from the topology or set your own IP subnetting.
+  
+#### On router device router-tel-bouh-1
+   - ip addr add 192.168.2.1/24 dev eth0
+   - ip adde add 192.168.1.2/24 dev eth1
+   - ip route add default via 192.168.1.1 dev eth1
+   
+   Again, repeat the same process on the second router.
+   To check connectivity between hosts, you will need to remove the link between the routers and Switch 1 and instead add a direct link between their eth1 interfaces.
+   As you know, a switch cannot perform IP routing; it operates at Layer 2 and only works with MAC addresses. We will restore the link after successfully pinging all hosts and validating connectivity.
+   To check connectivity between hosts, use the ping utility: ping <IP-Address>
+   Once you have verified the connection between all hosts, you can reconnect the routers to the switch and proceed with setting up the VXLAN tunnel between Router 1 and Router 2.   
+   
+   
+   
 
 
 
