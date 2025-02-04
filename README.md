@@ -87,7 +87,7 @@ The Topology:
    
    As you know, a switch cannot perform IP routing; it operates at Layer 2 and only works with MAC addresses. We will restore the link after successfully pinging all hosts and validating connectivity.
    
-   To check connectivity between hosts, use the ping utility: ping <IP-Address>
+   To check connectivity between hosts, use the ping utility:   **ping <IP-Address>**
    
    Once you have verified the connection between all hosts, you can reconnect the routers to the switch and proceed with setting up the VXLAN tunnel between Router 1 and Router 2.   
    
