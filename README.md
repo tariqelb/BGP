@@ -56,3 +56,19 @@ The Topology:
 -   https://docs.gns3.com/docs/using-gns3/beginners/the-gns3-gui
 -   https://docs.gns3.com/docs/getting-started/your-first-gns3-topology
 -   https://docs.gns3.com/docs/getting-started/your-first-cisco-topology
+
+## setup of host and router
+   First, we will configure our host and router devices **without** setting up the VXLAN tunnel between routers. Then, we will check connectivity between hosts by pinging their IP addresses. After that, we will set up a VXLAN tunnel between **router-tel-bouh-1 (VTEP1)** and **router-tel-bouh-2 (VTEP2)**.
+
+### Host configuration
+   For each host, we will assign an IP address to the Ethernet interface eth0. This can be done in two ways:
+    -   Editing the config file – Right-click on the host, select Edit config, and assign the IPs.
+    (This method preserves the configuration on Ethernet interfaces even if you close the project and return later.)
+    -   Using the command-line interface (CLI) – Right-click on the host and select Console.
+
+   We will use the second approach.
+   
+##### On host-tel-bouh-1 host:
+
+
+
