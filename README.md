@@ -40,6 +40,8 @@ To use these images as **host** and **router**, follow these steps:
 
 # Part 2
 
-  Here you will use docker container to setup you VXLAN topology, i will share with you my topology and the process of configuation of each device.
-  The Topology:
-  [inlude png image]
+     Here you will use docker container to setup you VXLAN topology, i will share with you my topology and the process
+  of configuation of each device.
+  
+     The Topology:
+   [![VXLAN Topology](topology.png)
