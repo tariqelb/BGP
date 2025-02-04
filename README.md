@@ -62,9 +62,9 @@ The Topology:
 
 ### Host configuration
    For each host, we will assign an IP address to the Ethernet interface eth0. This can be done in two ways:
-    -   Editing the config file – Right-click on the host, select Edit config, and assign the IPs.
+   -   Editing the config file – Right-click on the host, select Edit config, and assign the IPs.
     (This method preserves the configuration on Ethernet interfaces even if you close the project and return later.)
-    -   Using the command-line interface (CLI) – Right-click on the host and select Console.
+   -   Using the command-line interface (CLI) – Right-click on the host and select Console.
 
    We will use the second approach.
    
