@@ -44,4 +44,4 @@ To use these images as **host** and **router**, follow these steps:
   of configuation of each device.
   
      The Topology:
-   [![VXLAN Topology](topology.png)
+   ![VXLAN Topology](topology.png)
