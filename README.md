@@ -49,3 +49,10 @@ of configuation of each device.
   
 The Topology:
 ![VXLAN Topology](./vxlan_topology.png)
+
+
+ If this is your first time using GNS3, you can try those tutorials from GNS3 to get familiar with the workflow.
+ 
+-   https://docs.gns3.com/docs/using-gns3/beginners/the-gns3-gui
+-   https://docs.gns3.com/docs/getting-started/your-first-gns3-topology
+-   https://docs.gns3.com/docs/getting-started/your-first-cisco-topology
