@@ -66,8 +66,7 @@ The Topology:
     (This method preserves the configuration on Ethernet interfaces even if you close the project and return later.)
    -   Using the command-line interface (CLI) – Right-click on the host and select Console.
 
-   We will use the second approach.
-   Here is an example of the configuration on config file, don't forget to restart the device/host after saving config
+   We will use the second approach, but here is an example of the configuration on config file if you chose the fisrt approach, don't forget to restart the device/host after saving config
    
    ##### Static config for eth0
 	auto eth0
