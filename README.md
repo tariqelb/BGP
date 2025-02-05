@@ -97,10 +97,23 @@ The Topology:
    
    To check connectivity between hosts, use the ping utility:   **ping IP-Address**
    
-   Once you have verified the connection between all hosts, you can reconnect the routers to the switch and proceed with setting up the VXLAN tunnel between Router 1 and Router 2.   
-   
-   
-   
+   Once you have verified the connection between all hosts, you can reconnect the routers to the switch and proceed with setting up the VXLAN tunnel between Router 1 and Router 2.
+
+If you try to ping host-tel-bouh-4 from host-tel-bouh-1, the request will not reach its destination. Why?
+To answer this question, you need to understand how a switch operates. A switch forwards packets based on **MAC addresses** of directly connected devices; it does not perform **IP forwarding**.
+
+When a packet from host-tel-bouh-1 reaches Switch 1, the switch does not know how to forward it to host-tel-bouh-4 because the hosts are in different Layer 2 networks. To allow communication, we create a **VXLAN tunnel** between the two routers.
+How VXLAN Works in This Context
+
+VXLAN encapsulates the original packet inside another VXLAN header, which includes a destination IP address (the remote VTEP, or VXLAN Tunnel Endpoint). This way, when the encapsulated packet reaches the switch, the switch forwards it based on the outer MAC address.
+Packet Flow with VXLAN:
+
+-	The packet from host-tel-bouh-1 reaches Router 1.
+-	Router 1’s bridge forwards the packet to the VXLAN interface.
+-	The VXLAN interface encapsulates the packet, adding an outer MAC header and an IP header (with the remote VTEP’s IP address).
+-	The encapsulated packet is then sent via eth1 to Switch 1, which forwards it based on the MAC address.
+-	When the packet reaches Router 2, its VXLAN interface decapsulates it, removing the outer headers.
+-	The original packet is then forwarded as a normal Layer 2 frame to host-tel-bouh-4.
 
 
 
