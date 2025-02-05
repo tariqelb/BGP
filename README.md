@@ -105,7 +105,17 @@ To answer this question, you need to understand how a switch operates. A switch 
 When a packet from host-tel-bouh-1 reaches Switch 1, the switch does not know how to forward it to host-tel-bouh-4 because the hosts are in different Layer 2 networks. To allow communication, we create a **VXLAN tunnel** between the two routers.
 How VXLAN Works in This Context
 
-VXLAN encapsulates the original packet inside another VXLAN header, which includes a destination IP address (the remote VTEP, or VXLAN Tunnel Endpoint). This way, when the encapsulated packet reaches the switch, the switch forwards it based on the outer MAC address.
+VXLAN encapsulates the original packet inside another VXLAN header, which includes a destination IP address (the remote VTEP, or VXLAN Tunnel Endpoint). 
+VXLAN encapsulates the original packet inside another VXLAN header, which includes a source IP address (the local VTEP) and a destination IP address (the remote VTEP, or VXLAN Tunnel Endpoint).
+
+To simplify:
+
+-	On router-tel-bouh-1, the VXLAN interface encapsulates the packet by adding its own IP address as the source and the IP address of the VXLAN interface on router-tel-bouh-2 as the destination.
+-	When the packet reaches Switch 1, the switch does not understand VXLAN; it simply sees an outer IP packet.
+-	The switch will perform an ARP request to find the MAC address corresponding to the destination IP address (the remote VTEP's IP).
+-	Once the switch receives an ARP reply, it forwards the encapsulated VXLAN packet based on the outer MAC address.
+-	When the packet reaches router-tel-bouh-2, the VXLAN interface decapsulates it, removing the VXLAN header, and the original packet continues its normal route to the destination.
+
 Packet Flow with VXLAN:
 
 -	The packet from host-tel-bouh-1 reaches Router 1.
