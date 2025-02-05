@@ -126,4 +126,15 @@ Packet Flow with VXLAN:
 -	The original packet is then forwarded as a normal Layer 2 frame to host-tel-bouh-4.
 
 
+### Setting up vxlan10 interface and bridge on both routers
 
+**On router-tel-bouh-1**
+-	ip link add vxlan10 type vxlan id 10 dev eth1 local 192.168.1.2 remote 192.168.1.1 dstport 4789
+-	ip addr add 192.168.10.2/24 dev vxlan10
+-	ip link add br10 type bridge
+-	ip link set vxlan10 up
+-	ip link set br10 up
+
+The same process on **router-tel-bouh-2** with its own IP addresses.
+
+Now you can ping host-tel-bouh-4 from host-tel-bouh-1 to check connectivity
