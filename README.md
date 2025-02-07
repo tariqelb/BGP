@@ -141,14 +141,19 @@ Now you can ping host-tel-bouh-4 from host-tel-bouh-1 to check connectivity
 
 #### Static routing 
 
-Before we dive into vxlan dynamic multicast we will first do a simple lab on static routing and dynamic routing to understand it then we will complete the rest of this part, below is the topology that we will use:
+Before we dive into VXLAN dynamic multicast, we will first perform a simple lab on static routing and dynamic routing to understand the concepts. Once this is complete, we will proceed with the rest of this section. Below is the topology we will use:
 
 ![VXLAN Topology](./image/static_routing_01.png)
 
-In our router no default gateway is set , so if we try to ping host H1 (host-tel-bouh-1) from host H5 , **ping 192.168.2.2**  the packet will be forwared to the gateway on router R3 (router-tel-bouh-3) , when the packet reach that router a routing table match will occur but no mutch will found, packet network address is 192.168.2.0/24 and network IP address on interface eth1 is 192.168.5.0/24 so packet will droped by the router, if a gateway set in the router 192.168.5.1 the router will forward this packet to router R2, on router R2 will also do a packet network IP addrees match with routing table, and no match will found and the packet will forwarded to default gateway , let assum the eth1 on router R1 , then when packet reach R1 and match to routing table will happen and packet will be sent to host H1, but what if gateway is eth1 interface on R3 router then packet will not reach its destination, in our topology gateway can work fine on R1 and R3 but not on R2, alse we can not define more than one gatewat on a router, so in this lab we will not use default gateway rather we will use static, default gateway till the router where to forward packet when no match found static, static route help to match packet network IP address, so we will add static routes on the three routers R1, R2, and R3. 
+In our router, no default gateway is set. If we try to ping host H1 (host-tel-bouh-1) from host H5 by pinging 192.168.2.2, the packet will be forwarded to the gateway on router R3 (router-tel-bouh-3). When the packet reaches that router, a routing table match will occur, but no match will be found. The packet's network address is 192.168.2.0/24, and the network IP address on interface eth1 is 192.168.5.0/24, so the packet will be dropped by the router.
 
+If a gateway is set on the router as 192.168.5.1, the router will forward the packet to router R2. On router R2, the packet’s network IP address will again be checked against the routing table. If no match is found, the packet will be forwarded to the default gateway. Let’s assume the default gateway is eth1 on router R1. When the packet reaches R1, a match in the routing table will occur, and the packet will be sent to host H1.
 
-Now will configure static routes on each router in our topology without setting default gateway
+However, if the gateway is set to the eth1 interface on router R3, the packet will not reach its destination. In our topology, the gateway can work correctly on R1 and R3 but not on R2. Also, we cannot define more than one gateway on a router. Therefore, in this lab, we will not use a default gateway. Instead, we will configure static routes.
+
+A default gateway tells the router where to forward packets when no match is found in the routing table. Static routes, on the other hand, help to match a packet's network IP address to a specific route. In this lab, we will add static routes on the three routers: R1, R2, and R3.
+
+Now, we will configure static routes on each router in our topology without setting a default gateway.
 
 For router **router-tel-bouh-1**
 
@@ -166,7 +171,7 @@ For router **router-tel-bouh-1**
 
 
 
-What we do is simply tell the router if you get an IP address belong to one of those networks just forward them over eth1 interface.
+What we do is simply instruct the router: if you receive an IP address belonging to one of these networks, forward it through the eth1 interface.
 
 For router **router-tel-bouh-2**
 
@@ -185,5 +190,69 @@ For router **router-tel-bouh-3**
 
  	ip route add 192.168.3.0/24 via 192.168.5.1 dev eth1
 
+
+Now you can ping any hosts to ckeck your configuration.
+
+
+#### Dynamic routing
+
+Configuring static routes can be a simple task for small topology, but for hunder of routers and hosts it will be a very hard and complex task, to avoid that overhead we will do another lab on dynamic routing setting up **OSPF** on our router, we will make router learn routers dynamically. 
+
+We use the same topology, to remove static routes we just added use the below command:
+
+	
+ 	ip route del 192.168.3.0/24 dev eth1
+
+To understand how OSPF routing protocol you can make your own research or visit resourse pdf i provide.
+
+I already setting OSPF basic configuration , chek ospf.conf on p1 folder
+After deleting static routes lets check our configuration from router console
+On console type those commands:
+
+	vtysh
+
+  	show running-config
+
+Then press enter to see the compete configuration.
+
+
+	router ospf
+	 network 192.168.2.0/24 area 0.0.0.0
+
+You will find this basic configuration on all routers, we will change it and set correct networks on each router.
+
+I seggest first type ip route command and see the availible route first then after finish the configuration check the changes happen.
+
+To set new networks type those commands to reach ospf router config level.
+
+ 
+ 	configure terminal
+	
+ 	router ospf
+
+	
+
+for router **router-tel-bouh-1** add those networks
+
+
+	no network 192.168.2.0/24 area 0 # remove pre-defined network
+ 	network 192.168.1.0/24 area 0
+ 	network 192.168.2.0/24 area 0
+
+for router **router-tel-bouh-2** add those networks
+
+
+	no network 192.168.2.0/24 area 0
+	network 192.168.1.0/24 area 0
+ 	network 192.168.5.0/24 area 0
+  	network 192.168.3.0/24 area 0
+  	
+
+for router **router-tel-bouh-3** add those networks
+
+
+	no network 192.168.2.0/24 area 0
+	network 192.168.5.0/24 area 0
+ 	network 192.168.4.0/24 area 0
 
 
