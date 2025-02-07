@@ -48,7 +48,7 @@ To use these images as **host** and **router**, follow these steps:
 of configuation of each device.
   
 The Topology:
-![VXLAN Topology](./vxlan_topology.png)
+![VXLAN Topology](./image/vxlan_topology.png)
 
 
  If this is your first time using GNS3, you can try those tutorials from GNS3 to get familiar with the workflow.
@@ -138,3 +138,11 @@ Packet Flow with VXLAN:
 The same process on **router-tel-bouh-2** with its own IP addresses.
 
 Now you can ping host-tel-bouh-4 from host-tel-bouh-1 to check connectivity
+
+#### Static routing 
+
+Before we dive into vxlan dynamic multicast we will first do a simple lab on static routing and dynamic routing to understand it then we will complete the rest of this part, below is the topology that we will use:
+
+![VXLAN Topology](./static_routing_01.png)
+
+In our router no default gateway is set , so if we try to ping host H1 (host-tel-bouh-1) from host H5 , **ping 192.168.2.2**  the packet will be forwared to the gateway on router R3 (router-tel-bouh-3) , when the packet reach that router a routing table match will occur but no mutch will found, packet network address is 192.168.2.0/24 and network IP address on interface eth1 is 192.168.5.0/24 so packet will droped by the router, if a gateway set in the router 192.168.5.1 the router will forward this packet to router R2, on router R2 will also do a packet network IP addrees match with routing table, and no match will found and the packet will forwarded to default gateway , let assum the eth1 on router R1 , then when packet reach R1 and match to routing table will happen and packet will be sent to host H1, but what if gateway is eth1 interface on R3 router then packet will not reach its destination, in our topology gateway can work fine on R1 and R3 but not on R2, alse we can not define more than one gatewat on a router, so in this lab we will not use default gateway rather we will use static, default gateway till the router where to forward packet when no match found static, static route help to match packet network IP address, so we will add static routes on the three routers R1, R2, and R3. 
