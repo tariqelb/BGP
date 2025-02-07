@@ -146,3 +146,29 @@ Before we dive into vxlan dynamic multicast we will first do a simple lab on sta
 ![VXLAN Topology](./image/static_routing_01.png)
 
 In our router no default gateway is set , so if we try to ping host H1 (host-tel-bouh-1) from host H5 , **ping 192.168.2.2**  the packet will be forwared to the gateway on router R3 (router-tel-bouh-3) , when the packet reach that router a routing table match will occur but no mutch will found, packet network address is 192.168.2.0/24 and network IP address on interface eth1 is 192.168.5.0/24 so packet will droped by the router, if a gateway set in the router 192.168.5.1 the router will forward this packet to router R2, on router R2 will also do a packet network IP addrees match with routing table, and no match will found and the packet will forwarded to default gateway , let assum the eth1 on router R1 , then when packet reach R1 and match to routing table will happen and packet will be sent to host H1, but what if gateway is eth1 interface on R3 router then packet will not reach its destination, in our topology gateway can work fine on R1 and R3 but not on R2, alse we can not define more than one gatewat on a router, so in this lab we will not use default gateway rather we will use static, default gateway till the router where to forward packet when no match found static, static route help to match packet network IP address, so we will add static routes on the three routers R1, R2, and R3. 
+
+
+Now will configure static routes on each router in our topology without setting default gateway
+
+For router **router-tel-bouh-1**
+
+
+	ip route # dispay routes
+	
+ 	ip route add 192.168.3.0/24 dev eth1 # add now route
+	
+ 	ip route add 192.168.5.0/24 dev eth1
+	
+ 	ip route add 192.168.4.0/24 dev eth1
+	
+ 	ip route # show now configuration
+
+
+What we do is simply tell the router if you get an IP address belong to one of those networks just forward them over eth1 interface.
+
+For router **router-tel-bouh-2**
+
+	
+ 	ip route add 192.168.2.0/24 dev eth1
+	
+ 	ip route add 192.168.4.0/24 dev eth2
