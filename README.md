@@ -155,13 +155,15 @@ For router **router-tel-bouh-1**
 
 	ip route # dispay routes
 	
- 	ip route add 192.168.3.0/24 dev eth1 # add now route
+ 	ip route add 192.168.3.0/24 via 192.168.1.1 dev eth1 # add now route
 	
- 	ip route add 192.168.5.0/24 dev eth1
+ 	ip route add 192.168.5.0/24 via 192.168.1.1 dev eth1
 	
- 	ip route add 192.168.4.0/24 dev eth1
+ 	ip route add 192.168.4.0/24 via 192.168.1.1 dev eth1
 	
  	ip route # show now configuration
+
+
 
 
 What we do is simply tell the router if you get an IP address belong to one of those networks just forward them over eth1 interface.
@@ -169,6 +171,19 @@ What we do is simply tell the router if you get an IP address belong to one of t
 For router **router-tel-bouh-2**
 
 	
- 	ip route add 192.168.2.0/24 dev eth1
+ 	ip route add 192.168.2.0/24 via 192.168.1.2 dev eth1
 	
- 	ip route add 192.168.4.0/24 dev eth2
+ 	ip route add 192.168.4.0/24 via 192.168.5.2 dev eth2
+
+
+For router **router-tel-bouh-3**
+
+
+	ip route add 192.168.1.0/24 via 192.168.5.1 dev eth1
+
+	ip route add 192.168.2.0/24 via 192.168.5.1 dev eth1
+
+ 	ip route add 192.168.3.0/24 via 192.168.5.1 dev eth1
+
+
+
