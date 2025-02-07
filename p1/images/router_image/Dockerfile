@@ -4,6 +4,8 @@ RUN apk update && apk upgrade
 
 RUN apk add quagga
 
+RUN apk add vim
+
 # Create directories for Quagga configuration files
 RUN mkdir -p /etc/quagga /var/log/quagga /var/run/qugga
 
