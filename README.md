@@ -205,7 +205,7 @@ We use the same topology, to remove static routes we just added use the below co
 
 To understand how OSPF routing protocol you can make your own research or visit resourse pdf i provide.
 
-I already setting OSPF basic configuration , chek ospf.conf on p1 folder
+I already setting OSPF basic configuration , check ospf.conf on p1 folder
 After deleting static routes lets check our configuration from router console
 On console type those commands:
 
@@ -291,7 +291,7 @@ On router **router-tel-bouh-1**
   	ip addr add 192.168.10.1/24 dev vxlan10
 
    	ip link set vxlan10 up
-
+    
     	ip link add br10 type bridge
 
 	ip link set br10 up
@@ -307,13 +307,13 @@ On router **router-tel-bouh-1**
   	network 192.168.2.0/24 area 0
 
 
-On router **router-tel-bouh-1**
+ On router **router-tel-bouh-1**
 
-   	network 192.168.1.0/24 area 0
-    	network 192.168.3.0/24 area 0
+	network 192.168.1.0/24 area 0
+ 	network 192.168.3.0/24 area 0
 
 
-On router **router-tel-bouh-1**
+ On router **router-tel-bouh-1**
 
-     	network 192.168.1.0/24 area 0
+	network 192.168.1.0/24 area 0
       	network 192.168.4.0/24 area 0
