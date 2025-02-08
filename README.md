@@ -281,5 +281,39 @@ This is the new topology that we will use:
 ![VXLAN Topology](./screenshot/vxlan_dynamic_multicast_ospf.png)
 
 
+Now we will configure our VTEP router for **dynamic multicast** and also configure ospf.
+
+On router **router-tel-bouh-1** 
 
 
+ 	ip link add vxlan10 type vxlan id 10 **group 239.1.1.1** dev eth1 dstport 4789
+
+  	ip addr add 192.168.10.1/24 dev vxlan10
+
+   	ip link set vxlan10 up
+
+    	ip link add br10 type bridge
+
+	ip link set br10 up
+
+ Note that the vxlan group IP address should be from class D IP addresses
+
+ For other router you can do the same configuration, and after you will setup **ospf**
+
+ On router **router-tel-bouh-1**
+
+
+ 	network 192.168.1.0/24 area 0
+  	network 192.168.2.0/24 area 0
+
+
+On router **router-tel-bouh-1**
+
+   	network 192.168.1.0/24 area 0
+    	network 192.168.3.0/24 area 0
+
+
+On router **router-tel-bouh-1**
+
+     	network 192.168.1.0/24 area 0
+      	network 192.168.4.0/24 area 0
