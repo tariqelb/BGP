@@ -256,3 +256,20 @@ for router **router-tel-bouh-3** add those networks
  	network 192.168.4.0/24 area 0
 
 
+Our ospf configuration is complete , you can use those command to display you ospf configuration.
+
+
+	show ip ospf neighbor  # Display OSPF Neighbor Information
+
+ 	show ip ospf database  #  Display OSPF Link-State Database LSDB
+
+	show ip ospf           # Display OSPF Configuration
+
+	show ip ospf interface # Display OSPF Interfaces
+
+	show ip route ospf     # Display OSPF Routes
+
+ 
+ You can exit from vtysh and diplay new added route by ospf by execute **ip route** command.
+ You can ping hosts t check coneectivities between them.
+
