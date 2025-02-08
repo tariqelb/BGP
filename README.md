@@ -48,7 +48,7 @@ To use these images as **host** and **router**, follow these steps:
 of configuation of each device.
   
 The Topology:
-![VXLAN Topology](./image/vxlan_topology.png)
+![VXLAN Topology](./screenshot/vxlan_topology.png)
 
 
  If this is your first time using GNS3, you can try those tutorials from GNS3 to get familiar with the workflow.
@@ -143,7 +143,7 @@ Now you can ping host-tel-bouh-4 from host-tel-bouh-1 to check connectivity
 
 Before we dive into VXLAN dynamic multicast, we will first perform a simple lab on static routing and dynamic routing to understand the concepts. Once this is complete, we will proceed with the rest of this section. Below is the topology we will use:
 
-![VXLAN Topology](./image/static_routing_01.png)
+![VXLAN Topology](./screenshot/static_routing_01.png)
 
 In our router, no default gateway is set. If we try to ping host H1 (host-tel-bouh-1) from host H5 by pinging 192.168.2.2, the packet will be forwarded to the gateway on router R3 (router-tel-bouh-3). When the packet reaches that router, a routing table match will occur, but no match will be found. The packet's network address is 192.168.2.0/24, and the network IP address on interface eth1 is 192.168.5.0/24, so the packet will be dropped by the router.
 
@@ -274,9 +274,12 @@ Our ospf configuration is complete , you can use those command to display your o
  
  You can ping hosts to check coneectivities between them.
 
-
 Our simple labs on static and dynamic routing is done, know we will go back and complete **dynamic multicast** in vxlan topology.
 
 This is the new topology that we will use:
+
+![VXLAN Topology](./screenshot/static_routing_01.png)
+
+
 
 
