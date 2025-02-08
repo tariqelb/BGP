@@ -256,7 +256,7 @@ for router **router-tel-bouh-3** add those networks
  	network 192.168.4.0/24 area 0
 
 
-Our ospf configuration is complete , you can use those command to display you ospf configuration.
+Our ospf configuration is complete , you can use those command to display your ospf configuration.
 
 
 	show ip ospf neighbor  # Display OSPF Neighbor Information
@@ -270,6 +270,13 @@ Our ospf configuration is complete , you can use those command to display you os
 	show ip route ospf     # Display OSPF Routes
 
  
- You can exit from vtysh and diplay new added route by ospf by execute **ip route** command.
- You can ping hosts t check coneectivities between them.
+ Also you can exit from vtysh and diplay new added route by ospf, execute **ip route** command.
+ 
+ You can ping hosts to check coneectivities between them.
+
+
+Our simple labs on static and dynamic routing is done, know we will go back and complete **dynamic multicast** in vxlan topology.
+
+This is the new topology that we will use:
+
 
