@@ -276,12 +276,14 @@ Our ospf configuration is complete , you can use those command to display your o
 
 Our simple labs on static and dynamic routing is done, know we will go back and complete **dynamic multicast** in vxlan topology.
 
+### VXLAN tunnel using dynamic multicast
+
 This is the new topology that we will use:
 
 ![VXLAN Topology](./screenshot/vxlan_dynamic_multicast_ospf.png)
 
 
-Now we will configure our VTEP router for **dynamic multicast** and also configure ospf.
+Now we will configure our VTEP router using **dynamic multicast** and also configure **ospf** for dynamic routing.
 
 On router **router-tel-bouh-1** 
 
@@ -319,3 +321,8 @@ On router **router-tel-bouh-1**
 
 	network 192.168.1.0/24 area 0
  	network 192.168.4.0/24 area 0
+
+
+Before go to the next part let configure dynamic routing in our router with **IS-IS** rather that OSPF
+
+
