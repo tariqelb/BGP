@@ -316,4 +316,4 @@ On router **router-tel-bouh-1**
  On router **router-tel-bouh-1**
 
 	network 192.168.1.0/24 area 0
-      	network 192.168.4.0/24 area 0
+ 	network 192.168.4.0/24 area 0
