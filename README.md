@@ -292,9 +292,10 @@ On router **router-tel-bouh-1**
 
    	ip link set vxlan10 up
 
-    	ip link add br10 type bridge
+	ip link add br10 type bridge
 
-     	ip link set br10 up
+ 	ip link set br10 up
+
 
 
 Note that the vxlan group IP address should be from class D IP addresses
