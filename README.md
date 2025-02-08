@@ -278,7 +278,7 @@ Our simple labs on static and dynamic routing is done, know we will go back and 
 
 This is the new topology that we will use:
 
-![VXLAN Topology](./screenshot/static_routing_01.png)
+![VXLAN Topology](./screenshot/vxlan_dynamic_multicast_ospf.png)
 
 
 
