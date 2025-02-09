@@ -371,7 +371,7 @@ Now we will configure interface eth0 and eth1 on each router.
 
 	iterface eth0 # configure interface eth0
 
-     	ip router isis is-is-router-a
+	ip router isis is-is-router-a
 
 	exit
 
