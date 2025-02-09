@@ -42,7 +42,7 @@ To use these images as **host** and **router**, follow these steps:
    - For the **router image** set start command "sh /launch_services.sh"
    - click finish and apply.
 
-# Part 2
+# Part 2: Discovering a VXLAN.
 
    Before you envolve on this labs i strongly recommand you to make your reseach and understand some important concepts in this project like LAN, VLAN, WAN, VXLAN, RIP, ISIS, OSPF, BGP, you will find some helpfull links on Bgp_resource.pdf. 
 	
@@ -392,3 +392,10 @@ Now we will configure interface eth0 and eth1 on each router.
   After finish the configuaretion on each router, you can ping hosts and verify the connectivity.
 
   At this point we reach the end of part 1 of the project, next we will discover **BGP and EVPN**
+
+
+
+# Part 3: Discovering BGP with EVPN.
+
+
+
