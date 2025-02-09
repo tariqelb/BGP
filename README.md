@@ -323,6 +323,71 @@ On router **router-tel-bouh-1**
  	network 192.168.4.0/24 area 0
 
 
-Before go to the next part let configure dynamic routing in our router with **IS-IS** rather that OSPF
+Before go to the next part let configure dynamic routing in our router with **IS-IS** rather than OSPF
+
+### Dynamic routing with IS-IS
+
+I already have some basic configuration on isis.conf, but this configuration need some adjustment to work properlly with out topology.
 
 
+	! Set the hostname for the IS-IS daemon (used to identify the router in logs and CLI)
+	hostname isisd
+
+	! Password for accessing the IS-IS daemon CLI	
+	password isisd
+	enable password isisd
+
+	! Begin the IS-IS router configuration
+	router isis is-is-router-a
+
+	! Define the NET (Network Entity Title) identifier
+	! This identifies the router within the IS-IS domain
+	net 49.0001.1921.6800.1001.00
+
+	! Set the IS-IS router type as level-2-only
+	is-type level-2-only
+
+	!log file location for isisd logs
+	log file /var/log/quagga/isisd.log
+
+
+The Network Entity Title **net 49.0001.1921.6800.1001.00** will have some adjustement, for the fist two number address area **49.0001** will be the same on all router, and the three next numbers **1921.6800.1001** the system ID should be unique on each router, that is the first adjustement, the second adjustement will kame on router type, all our routers will operate as router type **level-1** rather than level-2-only.
+
+To make those changes first re-initialize the setup by click on file -> save project as -> and rename the project, then reconfigure vxlan dynamic multicast, then we will configure ISIS for dynamic routing.
+
+
+For each router set a unique system ID and router type to level-1. you can do that by open config file using **vim /etc/quagga/isisd.conf**. then execute **ps** command, then kill isisd daemon **kill -9 PID-Number**, and relaunch daemon by execute command **/usr/sbin/isisd -d -f /etc/quagga/isisd.conf**.
+
+Now we will configure interface eth0 and eth1 on each router.
+
+	
+ 	vtysh
+
+	show running-config # to see your current config on isis router and interfaces
+ 
+  	configure terminal
+
+   	router isis is-is-router-a # access router isis
+
+    	iterface eth0 # configure interface eth0
+
+     	ip router isis is-is-router-a
+
+	exit
+
+  	interface eth1
+
+   	ip router isis is-is-router-a
+
+    	exit
+
+      	exit
+
+       	show running-config # check your current config
+
+ 	show isis neighbot # display neighbors
+
+
+  After finish the configuaretion on each router, you can ping hosts and verify the connectivity.
+
+  At this point we reach the end of part 1 of the project, next we will discover **BGP and EVPN**
