@@ -364,26 +364,26 @@ Now we will configure interface eth0 and eth1 on each router.
  	vtysh
 
 	show running-config # to see your current config on isis router and interfaces
- 
+
   	configure terminal
 
    	router isis is-is-router-a # access router isis
 
-    	iterface eth0 # configure interface eth0
+	iterface eth0 # configure interface eth0
 
      	ip router isis is-is-router-a
 
 	exit
 
-  	interface eth1
+	interface eth1
 
-   	ip router isis is-is-router-a
+	ip router isis is-is-router-a
 
-    	exit
+	exit
 
-      	exit
+	exit
 
-       	show running-config # check your current config
+	show running-config # check your current config
 
  	show isis neighbot # display neighbors
 
