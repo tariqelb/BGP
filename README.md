@@ -291,38 +291,26 @@ On router **router-tel-bouh-1**
 
  	ip link add vxlan10 type vxlan id 10 **group 239.1.1.1** dev eth1 dstport 4789
 
-  	ip addr add 192.168.10.1/24 dev vxlan10
-
    	ip link set vxlan10 up
 
 	ip link add br10 type bridge
 
  	ip link set br10 up
 
+  	brctl addif br10 eth0
+
+   	brctl addif br10 vxlan10
+
 
 
 Note that the vxlan group IP address should be from class D IP addresses
-
-For other router you can do the same configuration, and after you will setup **ospf**
-
-On router **router-tel-bouh-1**
+for static vxlan you will define the local and remote router on each VTEP
 
 
- 	network 192.168.1.0/24 area 0
-  	network 192.168.2.0/24 area 0
+	ip link add vxlan10 type vxlan id 10 local ** IP-router-tel-bouh-1 ** remote ** IP-router-tel-bouh-2 ** dev eth1 dstport 4789
 
 
-On router **router-tel-bouh-1**
-
-	network 192.168.1.0/24 area 0
- 	network 192.168.3.0/24 area 0
-
-
-On router **router-tel-bouh-1**
-
-	network 192.168.1.0/24 area 0
- 	network 192.168.4.0/24 area 0
-
+For other router you can do the same configuration
 
 Before go to the next part let configure dynamic routing in our router with **IS-IS** rather than OSPF
 
