@@ -1,0 +1,7 @@
+# Use the Alpine base image
+FROM alpine:latest
+
+# Install BusyBox or any equivalent tools
+# RUN apk add --no-cache busybox
+# Set the default command to run when the container starts
+CMD ["sh"]

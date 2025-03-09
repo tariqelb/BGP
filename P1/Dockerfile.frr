@@ -1,0 +1,47 @@
+FROM frrouting/frr:latest
+
+# Install BusyBox (or any other necessary utilities)
+ENV PATH="/sbin:/usr/sbin:${PATH}"
+
+# Install necessary packages
+RUN apk add --no-cache busybox iproute2 bridge-utils
+
+# Enable the necessary services in FRRouting
+RUN sed -i 's/bgpd=no/bgpd=yes/g' /etc/frr/daemons && \
+    sed -i 's/ospfd=no/ospfd=yes/g' /etc/frr/daemons && \
+    sed -i 's/isisd=no/isisd=yes/g' /etc/frr/daemons && \
+    sed -i 's/zebra=no/zebra=yes/g' /etc/frr/daemons
+RUN touch /etc/frr/vtysh.conf
+
+# Create and configure FRRouting configuration files
+# Copy configuration files
+COPY    configs/bgpd.conf /etc/frr/bgpd.conf
+COPY    configs/ospfd.conf /etc/frr/ospfd.conf
+COPY    configs/isisd.conf /etc/frr/isisd.conf
+
+
+# Set proper permissions for config files
+RUN chown -R frr:frr /etc/frr && \
+    chmod 640 /etc/frr/*.conf
+
+# Add a health check to keep the container running
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD pgrep zebra || exit 1
+
+# Create symlinks for commonly used commands
+RUN ln -sf /sbin/ip /usr/bin/ip
+RUN ln -sf /usr/sbin/brctl /usr/bin/brctl
+
+# Set up aliases for all users
+RUN echo 'alias ip="/sbin/ip"' >> /etc/profile && \
+    echo 'alias brctl="/usr/sbin/brctl"' >> /etc/profile
+
+# Create a custom .bashrc for the root user
+RUN echo 'alias ip="/sbin/ip"' >> /root/.bashrc && \
+    echo 'alias brctl="/usr/sbin/brctl"' >> /root/.bashrc
+
+
+# Make sure aliases are loaded in non-interactive shells
+ENV ENV="/etc/profile"
+
+# Keep the container running and start FRR services
+ENTRYPOINT ["/usr/lib/frr/docker-start"]
